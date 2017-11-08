@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "K9WindowGuide"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "K9WindowGuide"
   s.description  = "A common guide."
   s.homepage     = "https://github.com/K999999999/K9WindowGuide"
