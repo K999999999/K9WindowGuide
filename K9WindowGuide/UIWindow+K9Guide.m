@@ -256,13 +256,7 @@ static char K9_WINDOW_GUIDE;
         dismissBlock:(void(^)(void))dismissBlock
                style:(K9WindowGuideStyle *)style {
     
-    K9WindowGuideView *oldGuide = [self k9_guideView];
-    if (oldGuide) {
-        
-        [oldGuide removeFromSuperview];
-        objc_setAssociatedObject(self, &K9_WINDOW_GUIDE, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    
+    [self k9_hideGuide];
     K9WindowGuideView *guideView = [[K9WindowGuideView alloc] init];
     guideView.guide = guide;
     guideView.forRect = forRect;
@@ -272,12 +266,7 @@ static char K9_WINDOW_GUIDE;
     guideView.tapBlock = ^{
         
         __strong typeof(weakSelf)self = weakSelf;
-        K9WindowGuideView *view = [self k9_guideView];
-        if (view) {
-            
-            [view removeFromSuperview];
-            objc_setAssociatedObject(self, &K9_WINDOW_GUIDE, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
+        [self k9_hideGuide];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             if (dismissBlock) {
@@ -304,6 +293,16 @@ static char K9_WINDOW_GUIDE;
 
 - (BOOL)k9_isShowingGuide {
     return (nil != [self k9_guideView].superview);
+}
+
+- (void)k9_hideGuide {
+    
+    K9WindowGuideView *guideView = [self k9_guideView];
+    if (guideView) {
+        
+        [guideView removeFromSuperview];
+        objc_setAssociatedObject(self, &K9_WINDOW_GUIDE, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
 }
 
 #pragma mark - Private Methods

@@ -48,6 +48,8 @@
 
 - (BOOL)k9_isShowingGuide;
 
+- (void)k9_hideGuide;
+
 @end
 
 @interface K9WindowGuideStyle : NSObject
