@@ -20,7 +20,7 @@ Objective-C:
 #### Podfile
 ```
 platform :ios, '8.0'
-pod 'K9WindowGuide', '~> 0.0.1'
+pod 'K9WindowGuide', '~> 0.0.2'
 ```
 
 ## Author
